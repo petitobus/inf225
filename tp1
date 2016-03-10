@@ -1,0 +1,26 @@
+Quels sont les différents types de buveurs ?
+ SQL> SELECT DISTINCT TYPE FROM BUVEURS;
+    petit moyen gros
+Lister les vins triés par crus croissants et millésimes décroissants?
+    SQL> select * from vins ORDER BY CRU ASC, MILL DESC;
+    ...    
+Quelles sont les régions de production de Pommard ou de Brouilly ?
+    select region from producteurs,recoltes,vins where producteurs.NP=recoltes.NP and recoltes.NV=vins.NV and (vins.cru='Pommard' or vins.cru='brouilly'); 
+    Rhone
+    Bourgogne
+Quelles sont les régions de production de Pommard et de Brouilly ?
+    SQL> (select region from producteurs,recoltes,vins where producteurs.NP=recoltes.NP and recoltes.NV=vins.NV and vins.cru='Pommard') INTERSECT (select region from producteurs,recoltes,vins where producteurs.NP=recoltes.NP and recoltes.NV=vins.NV and vins.cru='Brouilly'); 
+Quantités achetées par cru et par millésime ?
+    SQL> select cru,mill,qte from vins,Achats where vins.NV=achats.NV;
+
+Retrouver les numéros des vins produits par plus de trois producteurs.
+    SQL> select NV from recoltes where qte>3;
+Quels sont les producteurs qui ne produisent pas ?
+    SQL> select NOM from producteurs,recoltes where producteurs.NP=recoltes.NP and recoltes.QTE=0;
+    (select NP from producteurs) except (select NP from recoltes)
+Quels sont les buveurs qui ont acheté au moins un vin de millésime 1980 ?
+    select DISTINCT buveurs.NOM  from buveurs,vins,achats where vins.mill=1980 and vins.NV=achats.NV and buveurs.NB=achats.NB and achats.qte>0;
+Quels sont les buveurs qui n'ont acheté aucun vin de millésime 1980 ?
+select DISTINCT buveurs.NOM  from buveurs,vins,achats where vins.mill=1980 and vins.NV=achats.NV and buveurs.NB=achats.NB and achats.qte=0;
+Quels sont les buveurs qui n'ont acheté que des vins de millésime 1980 ?
+Quels sont les buveurs qui ont acheté tous les vins de millésime 1980 ?

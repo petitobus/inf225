@@ -1,0 +1,3 @@
+select TYPE from buveurs
+
+/
