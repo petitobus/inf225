@@ -8,7 +8,7 @@
 
 --Insérez dans bons_buveurs un buveur qui porte votre nom et votre prénom, un numéro égale au max(nb) + 1 et un type 'moyen'. Est ce que ce buveur est visible à travers la vue ?
     INSERT INTO bons_buveurs VALUES ((select max(NB) from bons_buveurs)+100,'YANG','Xuecan','moyen');
-    -! On ne peut pas utilisé max(NB)+1. Parce que max(NB)+1 (soit 100 ici) n'exist pas dans la vue bons_buveurs mais il est exist dans la table Buveurs. Donc on modifie la NB et la nouvelle buveurs est registré dans la table.'
+    -! On ne peut pas utilisé max(NB)+1. Parce que max(NB)+1 (soit 100 ici) n'exist pas dans la vue bons_buveurs mais il est exist dans la table Buveurs(ce que on ne sait pas). Donc il n'est pas visible. Donc on modifie la NB et la nouvelle buveurs est registré dans la table.
 
 --Insérez dans la même vue un autre buveur de type 'petit'. Est ce que ce buveur est visible ? expliquez ce qui c'est passé.
 --Détruisez puis recréez la vue bons_buveurs en spécifiant la clause WITH CHECK OPTION à la fin de la commande. Recommencez l'insertion d'un autre petit buveur. Est ce que ce buveur est maintenant visible ? expliquez ce que fait la clause ajoutée.
